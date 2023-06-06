@@ -2,7 +2,16 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
 name: rdicidr
-
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+  
+env:
+  ARM_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID }}"
+  ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+  ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
+  ARM_CLIENT_SECRET: "${{ secrets.AZURE_CLIENT_SECRET }}"
 on:
   push:
     branches:
@@ -71,10 +80,6 @@ jobs:
       runs-on: ubuntu-latest
       needs: build_and_push_docker_image
       env:
-        ARM_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID }}"
-        ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
-        ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
-        ARM_CLIENT_SECRET: "${{ secrets.AZURE_CLIENT_SECRET }}"
         working-directory: infra/
         
       steps:
@@ -100,10 +105,6 @@ jobs:
       runs-on: ubuntu-latest
       needs: build_and_push_docker_image
       env:
-        ARM_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID }}"
-        ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
-        ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
-        ARM_CLIENT_SECRET: "${{ secrets.AZURE_CLIENT_SECRET }}"
         working-directory: infra/
       steps:
         - uses: actions/checkout@v3
@@ -128,10 +129,6 @@ jobs:
       runs-on: ubuntu-latest
       needs: build_and_push_docker_image
       env:
-        ARM_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID }}"
-        ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
-        ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
-        ARM_CLIENT_SECRET: "${{ secrets.AZURE_CLIENT_SECRET }}"
         working-directory: infra/
       steps:
         - uses: actions/checkout@v3
