@@ -9,7 +9,7 @@ terraform {
     resource_group_name  = "sshkey"
     storage_account_name = "ccseyhan"
     container_name       = "terraform-backend"
-    key                  = "prod.terraform.tfstate"
+    key                  = "devel.terraform.tfstate"
   }
 }
 
