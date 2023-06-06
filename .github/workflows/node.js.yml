@@ -27,6 +27,7 @@ jobs:
      - name: Install requirements to the agent
        run: |
             npm install -g prettier
+            npm install -g npm@7
        
      - name: Linter
        run: npm run lint
