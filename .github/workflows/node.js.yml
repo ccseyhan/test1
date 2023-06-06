@@ -1,5 +1,5 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+# For more information see: https://docs.github.com/en/actions/automating-bsuilds-and-tests/building-and-testing-nodejs
 
 name: rdicidr
 
@@ -22,8 +22,9 @@ jobs:
        
        
      - name: Install requirements to the agent
-       run: npm install -g prettier
-       working-directory: ${{ env.working-directory }}
+       run: |
+          npm install -g prettier
+          npm install -g npm@7
        
      - name: Linter
        run: npm run lint
