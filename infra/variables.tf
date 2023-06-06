@@ -1,5 +1,5 @@
 variable "environment" {
-    default = "production"  
+    default = "devel"  
 }
 
 variable "location" {
