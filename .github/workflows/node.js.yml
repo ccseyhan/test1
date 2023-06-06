@@ -62,6 +62,8 @@ jobs:
         with:
           push: true
           tags: ccseyhan/test2313:latest
+          context: rdicidr-0.1.0/
+          
           
   infra_and_deploy_devel:
       runs-on: ubuntu-latest
@@ -71,6 +73,8 @@ jobs:
         ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
         ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
         ARM_CLIENT_SECRET: "${{ secrets.AZURE_CLIENT_SECRET }}"
+        working-directory: infra/
+        
       steps:
         - uses: actions/checkout@v3
           with:
@@ -80,13 +84,16 @@ jobs:
         
         - name: terraform init
           run: terraform init
+          working-directory: ${{ env.working-directory }}
           
         - name: terraform plan
           run: terraform plan
+          working-directory: ${{ env.working-directory }}
           
         - name: terraform apply
           run: terraform apply --auto-approve
-    
+          working-directory: ${{ env.working-directory }}
+          
   infra_and_deploy_stage:
       runs-on: ubuntu-latest
       needs: build_and_push_docker_image
@@ -95,6 +102,7 @@ jobs:
         ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
         ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
         ARM_CLIENT_SECRET: "${{ secrets.AZURE_CLIENT_SECRET }}"
+        working-directory: infra/
       steps:
         - uses: actions/checkout@v3
           with:
@@ -104,12 +112,15 @@ jobs:
         
         - name: terraform init
           run: terraform init
+          working-directory: ${{ env.working-directory }}
           
         - name: terraform plan
           run: terraform plan
+          working-directory: ${{ env.working-directory }}
           
         - name: terraform apply
           run: terraform apply --auto-approve  
+          working-directory: ${{ env.working-directory }}
           
   infra_and_deploy_prod:
       runs-on: ubuntu-latest
@@ -119,6 +130,7 @@ jobs:
         ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
         ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
         ARM_CLIENT_SECRET: "${{ secrets.AZURE_CLIENT_SECRET }}"
+        working-directory: infra/
       steps:
         - uses: actions/checkout@v3
           with:
@@ -128,12 +140,16 @@ jobs:
         
         - name: terraform init
           run: terraform init
+          working-directory: ${{ env.working-directory }}
           
         - name: terraform plan
           run: terraform plan
+          working-directory: ${{ env.working-directory }}
           
         - name: terraform apply
           run: terraform apply --auto-approve
+          working-directory: ${{ env.working-directory }}
+          
         
      
      
