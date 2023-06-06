@@ -21,7 +21,7 @@ jobs:
           node-version: '15.0.1' 
 
      - name: Checkout
-       uses: actions/checkout@v3.5.2
+       uses: actions/checkout@v2
        
        
      - name: Install requirements to the agent
